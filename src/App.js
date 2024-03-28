@@ -1,5 +1,5 @@
 import './App.css';
-import Calculette from './Calculette';
+import Calculette from './components/Calculette';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
