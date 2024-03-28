@@ -5,27 +5,27 @@ import Button from 'react-bootstrap/Button';
 
 const Calculette = () => {
 
-    //Etat
-    const [display, setDisplay] = useState ('');
-    const [result, setResult] = useState('');
+    const [total, setTotal] = useState ('');
 
-    //Comportement
-
-     //Cliquer pour choisir une touche
-     const clickOnButton = (e) => {
-
-        console.log(e.target.innerHTML);
+    const caracterToAdd = (e) => {
+        //Met à jour l'état total
+        //console.log(total + e.target.innerHTML)
+        setTotal(total + e.target.innerHTML)
     }
-            
-    //Calculer le résultat
-        const calculateResult = (CalculToDo) => {
-            result.value = eval(CalculToDo)
-        }
-        // Supprimer avec la touche C 
-        const clearDisplay = () => {
 
+    const calc = () => {
+        if (total !== "") {
+            setTotal(eval(total));
         }
+    }
 
+    const resetTotal = () => {
+        setTotal("");
+    }
+
+    const removeLastCaracter = () => {
+        setTotal(total.slice(0, -1))
+    }
 
     //Affichage
 
@@ -36,7 +36,7 @@ const Calculette = () => {
     <div className='container mt-5'>
         <InputGroup size="lg">
             <InputGroup.Text id="inputGroup-sizing-lg">TOTAL</InputGroup.Text>
-            <Form.Control
+            <Form.Control value={total}
             aria-label="Large"
             aria-describedby="inputGroup-sizing-sm"
             />
@@ -44,38 +44,38 @@ const Calculette = () => {
       </div>
       <div className='d-flex flex-column align-items-center gap-3"'>
             <div className='d-flex flex-row gap-2 col-5 mt-5' >
-                <Button onClick={clickOnButton} className='col-3 m-2' variant="info">7</Button>{''}
-                <Button onClick={clickOnButton} className='col-3 m-2' variant="info">8</Button>{' '}
-                <Button onClick={clickOnButton} className='col-3 m-2' variant="info">9</Button>{' '}
-                <Button onClick={clickOnButton} className='col-3 m-2' variant="warning">+</Button>{' '}
+                <Button onClick={caracterToAdd} className='col-3 m-2' variant="info">7</Button>
+                <Button onClick={caracterToAdd} className='col-3 m-2' variant="info">8</Button>
+                <Button onClick={caracterToAdd} className='col-3 m-2' variant="info">9</Button>
+                <Button onClick={caracterToAdd} className='col-3 m-2' variant="warning">+</Button>
             </div>
             <div className='d-flex flex-row gap-2 col-5'>
-                <Button onClick={clickOnButton} className='col-3 m-2' variant="info">6</Button>{' '}
-                <Button onClick={clickOnButton} className='col-3 m-2' variant="info">5</Button>{' '}
-                <Button onClick={clickOnButton} className='col-3 m-2' variant="info">4</Button>{' '}
-                <Button onClick={clickOnButton} className='col-3 m-2' variant="warning">-</Button>{' '}
+                <Button onClick={caracterToAdd} className='col-3 m-2' variant="info">6</Button>
+                <Button onClick={caracterToAdd} className='col-3 m-2' variant="info">5</Button>
+                <Button onClick={caracterToAdd} className='col-3 m-2' variant="info">4</Button>
+                <Button onClick={caracterToAdd} className='col-3 m-2' variant="warning">-</Button>
             </div>
             <div className='d-flex flex-row gap-2 col-5'>
-                <Button onClick={clickOnButton} className='col-3 m-2' variant="info">3</Button>{' '}
-                <Button onClick={clickOnButton} className='col-3 m-2' variant="info">2</Button>{' '}
-                <Button onClick={clickOnButton} className='col-3 m-2' variant="info">1</Button>{' '}
-                <Button onClick={clickOnButton} className='col-3 m-2' variant="warning">*</Button>{' '}
+                <Button onClick={caracterToAdd} className='col-3 m-2' variant="info">3</Button>
+                <Button onClick={caracterToAdd} className='col-3 m-2' variant="info">2</Button>
+                <Button onClick={caracterToAdd} className='col-3 m-2' variant="info">1</Button>
+                <Button onClick={caracterToAdd} className='col-3 m-2' variant="warning">*</Button>
             </div>
             <div className='d-flex flex-row gap-2 col-5'>
-                <Button onClick={clickOnButton} className='col-3 m-2' variant="info">.</Button>{' '}
-                <Button onClick={clickOnButton} className='col-3 m-2' variant="info">0</Button>{' '}
-                <Button onClick={clearDisplay} className='col-3 m-2' variant="danger">C</Button>{' '}
-                <Button onClick={clickOnButton} className='col-3 m-2' variant="warning">/</Button>{' '}
+                <Button onClick={caracterToAdd} className='col-3 m-2' variant="info">.</Button>
+                <Button onClick={caracterToAdd} className='col-3 m-2' variant="info">0</Button>
+                <Button onClick={resetTotal} className='col-3 m-2' variant="danger">C</Button>
+                <Button onClick={caracterToAdd} className='col-3 m-2' variant="warning">/</Button>
             </div>
             <div className='"d-flex flex-row gap-4 col-5"'>
-                <Button className='m-2 ' variant="danger">DELETE</Button>{' '}
-                <Button onClick={calculateResult} className='m-2' variant="dark">=</Button>{' '}
+                <Button onClick={removeLastCaracter} className='m-2 ' variant="danger">DELETE</Button>
+                <Button onClick={calc} className='m-2' variant="dark">=</Button>
             </div>
       </div>
 </>
 
 
-}
 
+}
 
 export default Calculette;
